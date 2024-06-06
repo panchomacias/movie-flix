@@ -7,15 +7,19 @@
     <h2>
       <%= year_of(@movie) %> &bull; <%= @movie.rating %>
     </h2>
-    <p>
-    <%= @movie.description %>
-    </p>
-    <table>
-      <tr>
-        <th>Total Gross:</th>
-        <td><%= total_gross(@movie) %></td>
-      </tr>
-    </table>
+    <div class="reviews">
+      <%= link_to pluralize(@movie.reviews.size, "review"),
+        movie_reviews_path(@movie) %>
+  </div>
+  <p>
+  <%= @movie.description %>
+  </p>
+  <table>
+    <tr>
+      <th>Total Gross:</th>
+      <td><%= total_gross(@movie) %></td>
+    </tr>
+  </table>
   </div>
 </section>
 
