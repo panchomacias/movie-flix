@@ -10,10 +10,9 @@ class ReviewsController < ApplicationController
 
   def create
     @review = @movie.reviews.new(review_params)
-
     if @review.save
       redirect_to movie_reviews_path(@movie.id),
-                  notice: 'Thanks for your review!'
+        notice: "Thanks for your review!"
     else
       render :new, status: :unprocessable_entity
     end
