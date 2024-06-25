@@ -1,20 +1,24 @@
 class SessionsController < ApplicationController
-  def index
+  def new
   end
 
   def create
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to user, notice: "Welcome back, #{user.name}!"
+      redirect_to (session[:intended_url] || user),
+                   notice: "Welcome back, #{user.name}!"
+      session[:intended_url] = nil
     else
-      flash.now[:alertr] = "Invalid email/password combination"
-      render "new", status: :unprocessable_entity
+      flash.now[:alert] = "Invalid email/password combination!"
+      render :new, status: :unprocessable_entity
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to movies_path, notice: "You're looged out!", status: :see_other
+    redirect_to movies_url, status: :see_other,
+      notice: "You're now signed out!"
   end
 end
+

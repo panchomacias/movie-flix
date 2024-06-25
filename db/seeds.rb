@@ -166,3 +166,13 @@ Movie.create!([
       image_file_name: "wonder-woman.png"
   }
 ])
+
+User.create!([
+  {
+    name: "Pancho",
+    username: "Pancho",
+    email: "pancho@gmail.com",
+    password: "passwordpassword",
+    password_confirmation: "passwordpassword"
+  }
+])
